@@ -30,15 +30,12 @@ function reset(){
                         console.log(datosApi);
                         $('#resultado  img').attr("src",`${datosApi.image['url']}`);
                         $('#resultado  .name').html(`Nombre: ${datosApi.name}`);
-                        /*
-                        datosApi.connections.forEach(element => {
-                        //$('#resultado  .connections').append(`${element}`);
-                        })*/
-  
                         Object.entries(datosApi.connections).forEach(([key, value]) => {
                           $('#resultado  .connections').append(`<p class="my-0">${key}: ${value}</p>`);
-                           
                         });
+                        $('#resultado .published').append(`<p class="my-0 fst-italic">Publicado por: ${datosApi.biography.publisher}</p>`);
+                        $('#resultado .occupation').append(`<p class="my-0 fst-italic">Ocupación: ${datosApi.work.occupation}</p>`);
+                        biography.first-appearance
                         
                         $('#resultado').removeClass('d-none');
                     }else{
