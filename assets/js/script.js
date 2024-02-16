@@ -95,6 +95,7 @@ function reset(){
             });
         }else{
             console.log('no es número');
+            alert('Ingresa un número enterp');
         }
         
     });
