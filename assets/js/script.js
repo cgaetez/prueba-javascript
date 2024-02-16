@@ -14,18 +14,18 @@ function valida(input){
         if(valida($('#hero').val())){
             console.log('es número');
             let id = $('#hero').val();
-            let url = `https://superheroapi.com/api/122174522798008153/${id}`;
+            let url = `https://superheroapi.com/api.php/122174522798008153/${id}`;
             $.ajax({
                 type:"GET",
                 url:url,
                 dataType:"json",
-                success: function(datosApi) {
-                    console.log(datosApi);
-                    datosApi.forEach(element => {
-                    $('#resultado').append(
-                        `<p>${element.id}-
-                        ${element.name}</p>`);
-                    })
+                success: 
+                function(datosApi) {
+                    console.log(datosApi.img);
+                      $('#resultado  img').attr("src",`${datosApi.image['url']}`);
+                      $('#resultado  .card-title').html(`Nombre: ${datosApi.name}`);
+                      
+                      $('#resultado').removeClass('d-none');
                 },
                 error: function(error) {
                     //si todo sale bien, se agrega la funcionalidad aquí.
