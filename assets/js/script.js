@@ -7,14 +7,10 @@ function valida(input){
 }
   
 function chartCall(SuperData){
-    let dataIn = new Object();
     let all = []
     Object.entries(SuperData).forEach(([key, value]) => {
-        dataIn.y= parseInt(value);
-        dataIn.label= key;
-        all.push(dataIn);
+        all.push({y:value,label:key});
     })
-    console.log(dataIn);
     console.log(all);
 
     var chart = new CanvasJS.Chart("chartContainer", {
