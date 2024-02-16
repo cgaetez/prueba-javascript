@@ -5,11 +5,52 @@ function valida(input){
     let numberRegex = /^\d+$/;
         return numberRegex.test(input); 
 }
-    
+  
+function chartCall(SuperData){
+    let dataIn = new Object();
+    let all = []
+    Object.entries(SuperData).forEach(([key, value]) => {
+        dataIn.y= parseInt(value);
+        dataIn.label= key;
+        all.push(dataIn);
+    })
+    console.log(dataIn);
+    console.log(all);
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            text: "Estadísticas de poder"
+        },
+        data: [{
+            type: "pie",
+            startAngle: 25,
+            toolTipContent: "<b>{label}</b>: {y}%",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 16,
+            indexLabel: "{label} - {y}%",
+            dataPoints: 
+                all
+            
+        }]
+    });
+    chart.render();
+    }
+
+
 function reset(){
     $('#error').addClass('d-none');
     $('#resultado').addClass('d-none');
     $('#resultado  .connections').html("");
+    $('#resultado  .published').html("");
+    $('#resultado  .occupation').html("");
+    $('#resultado  .first-appearance').html("");
+    $('#resultado  .height').html("");
+    $('#resultado  .weight').html("");
+    $('#resultado  .aliases').html("");
 }
 
     $('#buscar').on('click',function(e){
@@ -35,7 +76,13 @@ function reset(){
                         });
                         $('#resultado .published').append(`<p class="my-0 fst-italic">Publicado por: ${datosApi.biography.publisher}</p>`);
                         $('#resultado .occupation').append(`<p class="my-0 fst-italic">Ocupación: ${datosApi.work.occupation}</p>`);
-                        biography.first-appearance
+                        $('#resultado .first-appearance').append(`<p class="my-0 fst-italic">Primera aparición: ${datosApi.biography["first-appearance"]}</p>`);
+                        $('#resultado .height').append(`<p class="my-0 fst-italic">Altura: ${datosApi.appearance.height}</p>`);
+                        $('#resultado .weight').append(`<p class="my-0 fst-italic">Peso: ${datosApi.appearance.weight}</p>`);
+                        $('#resultado .aliases').append(`<p class="my-0 fst-italic">Alias: ${datosApi.biography.aliases}</p>`);
+
+                        chartCall(datosApi.powerstats);
+                        
                         
                         $('#resultado').removeClass('d-none');
                     }else{

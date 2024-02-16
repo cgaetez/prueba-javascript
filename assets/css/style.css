@@ -1,3 +1,10 @@
-.published p, .connections p, .occupation p, .first-appearance p{
+.published p, 
+.connections p, 
+.occupation p, 
+.first-appearance p,
+.height p,
+.weight p,
+.aliases p
+{
  font-size: 12px;
 }
